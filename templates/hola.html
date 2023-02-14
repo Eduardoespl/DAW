@@ -8,7 +8,7 @@
 
     }
     .card{
-        display: inline-block;
+        /*display: inline-block;*/
     }
     .card .card-image img{
         height: 200px;
@@ -40,14 +40,11 @@
     <div class="row">
         {% for i in consulta %}
         <div class="col s12 m12 l12">
-            <a href="#" id="{{i.id}}">
-                <div class="card-content">
-                    <span class="card-title activator grey-tex text-darken-4">
-                        <i class="material-icons">
-                            grass
-                        </i>
-                        sabor: {{i.sabor}}
-                    </span>
+            <a href="" id="{{i.id}}">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title activator grey-tex text-darken-4"><i class="material-icons ">grass</i>SABOR: {{i.sabor}} <i class="material-icons right btn_delete ">delete</i></span>
+                    </div>
                 </div>
             </a>
         </div>
@@ -55,15 +52,40 @@
 
     </div>
 </div>
-
-{{ i.pisos }}
-<div class="container">
-    {{formulario.as_p}}
-
+<div class="fixed-action-btn">
+    <a href="" class="btn-floating btn-large pulsa para agregar pastel" style="background-color: #0066ff;">
+        <i class="large material-icons">add</i>
+    </a>
 </div>
-{{consulta}}
+
+<div id="agregarpastel" class="modal modal-big">
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="modal-content">
+            <center><h4>Agregar pastel</h4></center>
+            <br/>
+            {{formulario.as_p}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
+            <button type="submit" class="btn waves-effect waves-green green">Agregar</button>
+        </div>
+    </form>
+</div>
+
 {% endblock content%}
 
 {% block js %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+        $('#agregarpaste').modal({
+            dismisible:true,
+        });
+    });
+    $(document).on("click",".agregarpastel", function(){
+        $('#agregarpastel').modal('open');
+    });
+</script>
 
 {% endblock js%}
