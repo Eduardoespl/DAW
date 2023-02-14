@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<input type="hidden" id="csrf_token" value="{{csrf_token}}">
+<style>
+    @media screen and (max-width: 600px){
+
+    }
+    .card{
+        display: inline-block;
+    }
+    .card .card-image img{
+        height: 200px;
+    }
+    .card{
+        height: 80px;
+    }
+    .head{
+        font-size: 25px;
+    }
+
+</style>
+<div class="container">
+    <br/>
+    <div class="row">
+        <div class="col s6 m4 l4">
+            <p class="head"> LISTA DE PASTELES </p>
+        </div>
+        <form class="col s6 m8 l8">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">search</i>
+                    <input id="icon_telephone" type="tel" class="validate"> 
+                    <label for="icon_telephone">BUSCAR COSA</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        {% for i in consulta %}
+        <div class="col s12 m12 l12">
+            <a href="#" id="{{i.id}}">
+                <div class="card-content">
+                    <span class="card-title activator grey-tex text-darken-4">
+                        <i class="material-icons">
+                            grass
+                        </i>
+                        sabor: {{i.sabor}}
+                    </span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{{ i.pisos }}
+<div class="container">
+    {{formulario.as_p}}
+
+</div>
+{{consulta}}
+{% endblock content%}
+
+{% block js %}
+
+{% endblock js%}
