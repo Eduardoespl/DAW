@@ -2,85 +2,86 @@
 {% load static %}
 
 {% block content %}
-<input type="hidden" id="csrf_token" value="{{csrf_token}}">
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
 <style>
-    @media screen and (max-width: 600px){
+    @media screen and (max-with:600px){
 
     }
     .card{
-        /*display: inline-block;*/
+        /* display: inline-block; */
+
     }
     .card .card-image img{
-        height: 200px;
+        height:200px;
     }
     .card{
-        height: 80px;
+        height:80px;
     }
     .head{
         font-size: 25px;
     }
-
 </style>
 <div class="container">
     <br/>
     <div class="row">
         <div class="col s6 m4 l4">
-            <p class="head"> LISTA DE PASTELES </p>
+            <p class="head">LISTA PASTELES</p>
         </div>
         <form class="col s6 m8 l8">
-            <div class="row">
-                <div class="input-field col s12">
+           <div class="row">
+                <div class = "input-field col s12">
                     <i class="material-icons prefix">search</i>
-                    <input id="icon_telephone" type="tel" class="validate"> 
-                    <label for="icon_telephone">BUSCAR COSA</label>
+                    <input id="icon-telephone" type="tel" class="validate">
+                    <label for="icon-telephone">Buscar Pastel</label>
                 </div>
-            </div>
+            </div> 
         </form>
     </div>
     <div class="row">
         {% for i in consulta %}
-        <div class="col s12 m12 l12">
-            <a href="" id="{{i.id}}">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title activator grey-tex text-darken-4"><i class="material-icons ">grass</i>SABOR: {{i.sabor}} <i class="material-icons right btn_delete ">delete</i></span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        {% endfor %}
 
+                    <div class="col s12 m12 l12">
+                        <a href="" id="{{i.id}}">
+                            <div class = "card">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+        {% endfor %}
     </div>
 </div>
 <div class="fixed-action-btn">
-    <a href="" class="btn-floating btn-large pulsa para agregar pastel" style="background-color: #0066ff;">
-        <i class="large material-icons">add</i>
+    <a class = "btn-floating btn-large pulsa para agregarpastel" style = "background-color: #0066ff">
+        <i class = "large material-icons">add</i>
     </a>
 </div>
 
-<div id="agregarpastel" class="modal modal-big">
-    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-        <div class="modal-content">
+<div id = "agregarpastel" class="modal modal-big">
+    <form action = "" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
+        <div class = "modal-content">
             <center><h4>Agregar pastel</h4></center>
-            <br/>
+            </br>
             {{formulario.as_p}}
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
-            <button type="submit" class="btn waves-effect waves-green green">Agregar</button>
+        <div class = "modal-footer">
+            <button type = "button" class = "btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
+            <button type = "submit" class = "btn waves-effect waves waves-green green">Agregar</button>
         </div>
     </form>
 </div>
 
+
 {% endblock content%}
 
-{% block js %}
 
-<script type="text/javascript">
+{% block js %}
+<script type = "text/javascript">
     $(document).ready(function(){
         $('.materialboxed').materialbox();
-        $('#agregarpaste').modal({
-            dismisible:true,
+        $('#agregarpastel').modal({
+            dismissible: true,
         });
     });
     $(document).on("click",".agregarpastel", function(){
@@ -88,4 +89,5 @@
     });
 </script>
 
-{% endblock js%}
+
+{% endblock js %}
