@@ -37,11 +37,11 @@
             </div> 
         </form>
     </div>
-    <div class="row">
+    <div class="row pastel">
         {% for i in consulta %}
 
                     <div class="col s12 m12 l12">
-                        <a href="" id="{{i.id}}">
+                        <a href="/detalle_pastel/{{i.id}}" id="{{i.id}}">
                             <div class = "card">
                                 <div class="card-content">
                                     <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>
@@ -60,7 +60,7 @@
 </div>
 
 <div id = "agregarpastel" class="modal modal-big">
-    <form action = "" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
+    <form action = "{% url 'post_pastel' %}" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
         <div class = "modal-content">
             <center><h4>Agregar pastel</h4></center>
             </br>
@@ -94,14 +94,14 @@
             method:"POST",
             data:formData,
             success: function(data){
-                var injerto='<div class="col s12 m12 l12">'
-                            '<a href="" id="{{i.id}}">'
-                                '<div class = "card">'
-                                    '<div class="card-content">'
-                                        '<span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>'
-                                    '</div>'
-                                '</div>'
-                            '</a>'
+                var injerto='<div class="col s12 m12 l12">'+
+                            '<a href="">'+
+                                '<div class = "card">'+
+                                    '<div class="card-content">'+
+                                        '<span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</a>'+
                         '</div>';
                         $('.pastel').append(injerto)
                         M.toast({html: "pastelito agregado exitosamente!!!!!"});
@@ -112,8 +112,5 @@
                         }
         });
     }
-
 </script>
-
-
 {% endblock js %}
