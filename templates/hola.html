@@ -7,19 +7,19 @@
     @media screen and (max-with:600px){
 
     }
-    /*.card{
-        display: inline-block; 
-
-    }*/
+   
     .card .card-image img{
         height:200px;
     }
+
     .card{
         height:80px;
     }
+    
     .head{
         font-size: 25px;
     }
+
 </style>
 <div class="container">
     <br/>
@@ -41,7 +41,7 @@
         {% for i in consulta %}
 
                     <div class="col s12 m12 l12">
-                        <a href="/detalle_pastel/{{i.id}}" id="{{i.id}}">
+                        <!--<a href="/detalle_pastel/{{i.id}}" id="{{i.id}}">-->
                             <div class = "card">
                                 <div class="card-content">
                                     <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>
@@ -73,6 +73,19 @@
     </form>
 </div>
 
+<div id = "editarpastel" class="modal modal-big">
+    <form action = "{% url 'post_pastel' %}" method = "GET" enctype = "multipart/form-data">{% csrf_token%}
+        <div class = "modal-content">
+            <center><h4>Modificar pastel</h4></center>
+            </br>
+            {{formulario.as_p}}
+        </div>
+        <div class = "modal-footer">
+            <button type = "button" class = "btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
+            <button type = "submit" class = "btn waves-effect waves waves-green green">Agregar</button>
+        </div>
+    </form>
+</div>
 
 {% endblock content%}
 
@@ -84,10 +97,19 @@
         $('#agregarpastel').modal({
             dismissible: true,
         });
+        $('#editarpastel').modal({
+            dismissible: true,
+        });
     });
+
     $(document).on("click",".agregarpastel", function(){
         $('#agregarpastel').modal('open');
     });
+
+    $(document).on("click",".card-content", function(){
+        $('#editarpastel').modal('open');
+    });
+
     function agregarpastel(formData){
         $.ajax({
             url:"{% url 'post_pastel' %}",
@@ -95,22 +117,22 @@
             data:formData,
             success: function(data){
                 var injerto='<div class="col s12 m12 l12">'+
-                            '<a href="">'+
-                                '<div class = "card">'+
-                                    '<div class="card-content">'+
-                                        '<span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>'+
-                                    '</div>'+
+                    '<a href="">'+
+                        '<div class = "card">'+
+                            '<div class="card-content">'+
+                                '<span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>'+
+                                '</div>'+
                                 '</div>'+
                             '</a>'+
                         '</div>';
                         $('.pastel').append(injerto)
                         M.toast({html: "pastelito agregado exitosamente!!!!!"});
                         $('#agregarpastel').modal('close');
-                },
-                        error:function(data){
-                            console.log("error")
-                        }
-        });
-    }
+                    },
+                    error:function(data){
+                        console.log("error")
+                    }
+                });
+            }
 </script>
 {% endblock js %}
