@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+<style>
+    @media screen and (max-with:600px){
+
+    }
+   
+    .card .card-image img{
+        height:200px;
+    }
+
+    .card{
+        height:80px;
+    }
+    
+    .head{
+        font-size: 25px;
+    }
+
+</style>
+
+<div id = "agregarpastel" class="container">
+    <form action = "/postm_pastel/{{id}}" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
+        <div class = "modal-content">
+            <center><h4>Editar pastel</h4></center>
+            </br>
+            {{form.as_p}}
+        </div>
+        <div class = "modal-footer">
+            <button type = "button" class = "btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
+            <button type = "submit" class = "btn waves-effect waves waves-green green">Modificar</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content%}

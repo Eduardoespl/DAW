@@ -37,11 +37,11 @@
             </div> 
         </form>
     </div>
-    <div class="row pastel">
+    <div class="row pastel #editarpastel">
         {% for i in consulta %}
 
                     <div class="col s12 m12 l12">
-                        <!--<a href="/detalle_pastel/{{i.id}}" id="{{i.id}}">-->
+                        <a id="{{i.id}}" href="/detalle_pastel/{{i.id}}" >
                             <div class = "card">
                                 <div class="card-content">
                                     <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>
@@ -106,7 +106,7 @@
         $('#agregarpastel').modal('open');
     });
 
-    $(document).on("click",".card-content", function(){
+    $(document).on("click",".editarpastel", function(){
         $('#editarpastel').modal('open');
     });
 

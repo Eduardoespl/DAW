@@ -34,3 +34,21 @@ def post_pastel(request):
             form = pastelform( )
         return render(request, 'hola.html', context)
     
+def updatepastel(request, id):
+    resultado = pastel.objects.get(id=id)
+    print(id)
+    id=id
+    form = pastelform(instance=resultado)
+    template_to_return='updatepastel.html'
+    if request.method == 'POST':
+        print("Hola")
+        if form.is_valid():
+            form.save()
+
+    context={
+        'form': form,
+        'resultado': resultado,
+        'id': id,
+    }
+
+    return render(request, template_to_return, context)
