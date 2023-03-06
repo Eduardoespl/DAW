@@ -37,14 +37,15 @@
             </div> 
         </form>
     </div>
-    <div class="row pastel #editarpastel">
+    <div class="row pastel modificarpastel">
         {% for i in consulta %}
 
                     <div class="col s12 m12 l12">
-                        <a id="{{i.id}}" href="/detalle_pastel/{{i.id}}" >
+                        <a id="{{i.id}}">
+                    {% comment %} <a id="{{i.id}}" href="/detalle_pastel/{{i.id}}" > {% endcomment %}
                             <div class = "card">
                                 <div class="card-content">
-                                    <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>sabor: {{i.sabor}} <i class = "material-icons right btn_delete">delete</i> </span>
+                                    <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>Sabor: {{i.sabor}}       Precio: ${{i.precio}} <i class = "material-icons right btn_delete">delete</i> </span>
                                 </div>
                             </div>
                         </a>
@@ -73,8 +74,8 @@
     </form>
 </div>
 
-<div id = "editarpastel" class="modal modal-big">
-    <form action = "{% url 'post_pastel' %}" method = "GET" enctype = "multipart/form-data">{% csrf_token%}
+<div id = "modificarpastel" class="modal modal-big">
+    <form action = "{% url 'post_pastel' %}" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
         <div class = "modal-content">
             <center><h4>Modificar pastel</h4></center>
             </br>
@@ -97,7 +98,8 @@
         $('#agregarpastel').modal({
             dismissible: true,
         });
-        $('#editarpastel').modal({
+        $('.materialboxed').materialbox();
+        $('#modificarpastel').modal({
             dismissible: true,
         });
     });
@@ -105,9 +107,19 @@
     $(document).on("click",".agregarpastel", function(){
         $('#agregarpastel').modal('open');
     });
-
-    $(document).on("click",".editarpastel", function(){
-        $('#editarpastel').modal('open');
+    
+    $(document).on("click",".modificarpastel",function(){
+        var id = $(this).data('id');
+    
+        $.ajax({
+            url:'/datos_modal/1/',
+            type: 'GET',
+            dataType: 'html',
+            success: function(data) {
+                $('#modificarpastel').html(data);
+                $('#modificarpastel').modal('open');
+            }
+        });         
     });
 
     function agregarpastel(formData){
@@ -134,5 +146,6 @@
                     }
                 });
             }
+
 </script>
 {% endblock js %}
