@@ -37,20 +37,18 @@
             </div> 
         </form>
     </div>
+
     <div class="row pastel modificarpastel">
         {% for i in consulta %}
-
-                    <div class="col s12 m12 l12">
-                        <a id="{{i.id}}">
-                    {% comment %} <a id="{{i.id}}" href="/detalle_pastel/{{i.id}}" > {% endcomment %}
-                            <div class = "card">
-                                <div class="card-content">
-                                    <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>Sabor: {{i.sabor}}       Precio: ${{i.precio}} <i class = "material-icons right btn_delete">delete</i> </span>
-                                </div>
-                            </div>
-                        </a>
+        <div class="col s12 m12 l12">
+            <a onclick="modificarp('/obtener_datos/{{i.id}}')" data-my-id="{{ i.id }}" class="my-link">
+                <div class = "card">
+                    <div class="card-content">
+                        <span class="card-title activator grey-tex text-darken-4"><i class="material-icons">cake</i>Sabor: {{i.sabor}}       Precio: ${{i.precio}} <i class = "material-icons right btn_delete">delete</i> </span>
                     </div>
-
+                </div>
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -75,9 +73,9 @@
 </div>
 
 <div id = "modificarpastel" class="modal modal-big">
-    <form action = "{% url 'post_pastel' %}" method = "POST" enctype = "multipart/form-data">{% csrf_token%}
+    <form action = "{% url 'post_pastel' %}" method = "POST" enctype = "multipart/form-data">
         <div class = "modal-content">
-            <center><h4>Modificar pastel</h4></center>
+            <center><h4>Modificar pastel</h4></center>{% csrf_token%}
             </br>
             {{formulario.as_p}}
         </div>
@@ -96,37 +94,36 @@
     $(document).ready(function(){
         $('.materialboxed').materialbox();
         $('#agregarpastel').modal({
-            dismissible: true,
+            dismissible: true, 
         });
         $('.materialboxed').materialbox();
         $('#modificarpastel').modal({
-            dismissible: true,
+            dismissible: true, 
         });
     });
-
-    $(document).on("click",".agregarpastel", function(){
-        $('#agregarpastel').modal('open');
+    $(document).on("click",".agregarpastel",function(){
+        $('#agregarpastel').modal('open');       
+        
     });
-    
-    $(document).on("click",".modificarpastel",function(){
-        var id = $(this).data('id');
-    
+        
+    function modificarp(id){
         $.ajax({
-            url:'/datos_modal/1/',
+            url:id,
             type: 'GET',
             dataType: 'html',
             success: function(data) {
                 $('#modificarpastel').html(data);
                 $('#modificarpastel').modal('open');
             }
-        });         
-    });
+        }); 
+    };
+        
 
-    function agregarpastel(formData){
+    function agregarpastel(FormData){
         $.ajax({
             url:"{% url 'post_pastel' %}",
             method:"POST",
-            data:formData,
+            data:FormData,
             success: function(data){
                 var injerto='<div class="col s12 m12 l12">'+
                     '<a href="">'+

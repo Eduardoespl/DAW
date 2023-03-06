@@ -6,18 +6,13 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
-def datos_modal(request, id):
+def obtener_datos(request, id):
     objeto = pastel.objects.get(id=id)
-    id=id
+    id = id
     formulario = pastelform(instance=objeto)
-    datos = {'formulario': formulario}
-    html_form = render_to_string('updatepastel.html', datos, request=request)
-    context={
-        'formulario':formulario,
-        'objeto':objeto,
-        'id':id,
-    }
-    return HttpResponse(html_form,id)
+    datos = {'form': formulario}
+    html_modal = render_to_string('updatepastel.html', datos, request=request)
+    return HttpResponse(html_modal,id)
 
 # Create your views here.
 def landing(request):

@@ -1,10 +1,10 @@
 <div id = "agregarpastel" class="container">
-    <form action = "/datos_modal/{{id}}" method = "GET" enctype = "multipart/form-data">
+    <form action = "/postm_pastel/{{id}}" method = "POST" enctype = "multipart/form-data">
         <div class = "modal-content">
-            <center><h4>Editar pastel</h4></center>
+            <center><h4>Editar pastel: {{id}}</h4></center>
             {% csrf_token %}
             </br>
-            {{formulario.as_p}}
+            {{form.as_p}}
         </div>
         <div class = "modal-footer">
             <button type = "button" class = "btn modal-close waves-effect waves-green grey btn-small">Cancelar</button>
