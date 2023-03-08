@@ -10,4 +10,5 @@ urlpatterns = [
     path('detalle_pastel/<int:id>', updatepastel,name="updatepastel"),
     path('obtener_datos/<int:id>', updatepastel,name="postm_pastel"),
     path('postm_pastel/<int:id>', updatepastel,name="postm_pastel"),
+    path('removerpastel', removerpastel,name="removerpastel"),
 ]

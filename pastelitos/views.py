@@ -69,3 +69,9 @@ def updatepastel(request,id):
         'id':id,
     }
     return render (request, template_to_return,context)
+
+def removerpastel(request):
+    idpastel=request.POST["idpastel"]
+    consulta = pastel.objects.get(id=idpastel)
+    consulta.delete()
+    return HttpResponse("pastel removido exitosamente!!")

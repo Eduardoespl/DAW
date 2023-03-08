@@ -1,7 +1,7 @@
 <div id = "agregarpastel" class="container">
     <form action = "/postm_pastel/{{id}}" method = "POST" enctype = "multipart/form-data">
         <div class = "modal-content">
-            <center><h4>Editar pastel: {{id}}</h4></center>
+            <center><h4>Editar pastel: </h4></center>
             {% csrf_token %}
             </br>
             {{form.as_p}}
